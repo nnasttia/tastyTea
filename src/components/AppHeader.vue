@@ -15,9 +15,7 @@
               </a>
             </li>
             <li>
-              <a href="#">
-                About
-              </a>
+              <router-link to="/about">About</router-link>
             </li>
             <li>
               <a href="#">
@@ -43,7 +41,7 @@
           </div>
           <div class="header-cart-container">
             <div class="header-cart-element">
-              <a href="#">Cart: {{ cartStore.totalQuantity }}</a>
+              <router-link to="/cart">Cart: {{ cartStore.totalQuantity }}</router-link>
             </div>
           </div>
 
@@ -71,7 +69,7 @@
                 <span>Subtotal:</span>
                 <span>${{ cartStore.totalPrice.toFixed(2)}}</span>
               </div>
-              <button class="cart-checkout-button">
+              <button class="cart-checkout-button" @click="cartPage">
                 <svg width="20" height="20" viewBox="0 0 902.86 902.86" fill="#ffffff"><path d="M671.504 577.829 781.989 145.22H902.86v-68H729.174L703.128 179.2 0 178.697l74.753 399.129h596.751v.003zm14.262-330.641-67.077 262.64h-487.49L81.928 246.756l603.838.432zM578.418 825.641c59.961 0 108.743-48.783 108.743-108.744s-48.782-108.742-108.743-108.742H168.717c-59.961 0-108.744 48.781-108.744 108.742s48.782 108.744 108.744 108.744S277.46 776.858 277.46 716.897c0-14.4-2.821-28.152-7.927-40.742h208.069c-5.107 12.59-7.928 26.342-7.928 40.742.001 59.961 48.783 108.744 108.744 108.744zM209.46 716.897c0 22.467-18.277 40.744-40.743 40.744s-40.744-18.277-40.744-40.744c0-22.465 18.277-40.742 40.744-40.742 22.466 0 40.743 18.277 40.743 40.742zm409.702 0c0 22.467-18.277 40.744-40.743 40.744s-40.743-18.277-40.743-40.744c0-22.465 18.277-40.742 40.743-40.742s40.743 18.277 40.743 40.742z"/></svg>
                 CHECKOUT
               </button>
@@ -92,248 +90,252 @@
 </template>
 
 <script setup>
-/*import { useRouter } from 'vue-router';
-const router = useRouter();
-const goToAbout = () => {
-  router.push('/about');
-};*/
 import { ref } from 'vue';
-
 import { useCartStore } from '@/js/stores/cart';
+import {useRouter} from "vue-router";
 
+const router = useRouter();
 const cartStore = useCartStore();
 
 const showCart = ref(false);
 
+const removeItem = (index) => {
+  cartStore.items.splice(index, 1);
+}
+
+const cartPage = () => {
+  router.push({ name: 'cart' });
+}
+
 </script>
 
 <style scoped lang="scss">
-  .app-header {
-    margin-top: 20px;
-    margin-bottom: 0;
-  }
+.app-header {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
 
-  .header-row {
-    width: 100%;
-    display: flex;
-  }
+.header-row {
+  width: 100%;
+  display: flex;
+}
 
-  .header-logo {
-    padding: 10px 0 0 0;
+.header-logo {
+  padding: 10px 0 0 0;
+  display: flex;
+  transition: background .3s, border .3s, border-radius .3s, box-shadow .3s,
+  -webkit-border-radius .3s, -webkit-box-shadow .3s;
+  justify-content: flex-start;
+  /*width: 100%;*/
+}
+
+.header-menu {
+  position: relative;
+  min-height: 1px;
+  display: flex;
+  margin: 15px 0 0 0;
+  padding: 10px;
+
+  ul {
     display: flex;
-    transition: background .3s, border .3s, border-radius .3s, box-shadow .3s,
-    -webkit-border-radius .3s, -webkit-box-shadow .3s;
     justify-content: flex-start;
-    /*width: 100%;*/
-  }
-
-  .header-menu {
-    position: relative;
-    min-height: 1px;
-    display: flex;
-    margin: 15px 0 0 0;
-    padding: 10px;
-
-    ul {
-      display: flex;
-      justify-content: flex-start;
-      flex-flow: row wrap;
-      align-items: center;
-      align-content: center;
-      margin: 0;
-
-      li {
-        flex-grow: 0;
-        position: static;
-        justify-content: space-between;
-      }
-
-      a {
-        padding: 0;
-        margin: 0 31px 0 0;
-
-        &:hover {
-          color: var(--main-color);
-        }
-      }
-    }
-
-    ul li {
-      position: relative;
-    }
-
-    ul li .submenu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: white;
-      border: 1px solid #ddd;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      min-width: 200px;
-    }
-
-    ul li:hover .submenu {
-      display: block;
-    }
-
-    ul li a {
-      padding: 0;
-      margin: 0 31px 0 0;
-      position: relative;
-    }
-
-    ul li a:hover {
-      color: var(--main-color);
-    }
-  }
-
-  .header-cart {
+    flex-flow: row wrap;
     align-items: center;
     align-content: center;
-    padding: 10px;
-    margin: 15px 0 0 auto;
-    position: relative;
+    margin: 0;
 
-
-    .header-cart-container {
-      width: auto;
+    li {
+      flex-grow: 0;
+      position: static;
+      justify-content: space-between;
     }
 
-    .header-cart-element {
+    a {
+      padding: 0;
       margin: 0 31px 0 0;
 
-      a {
-        font-size: 18px;
-        text-transform: none;
-        fill: var(--main-color);
+      &:hover {
         color: var(--main-color);
-        background-color: rgba(0, 0, 0, 0);
-        padding: 0;
+      }
+    }
+  }
 
-        &:hover {
-          color: var(--second-color);
-        }
+  ul li {
+    position: relative;
+  }
+
+  ul li .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+  }
+
+  ul li:hover .submenu {
+    display: block;
+  }
+
+  ul li a {
+    padding: 0;
+    margin: 0 31px 0 0;
+    position: relative;
+  }
+
+  ul li a:hover {
+    color: var(--main-color);
+  }
+}
+
+.header-cart {
+  align-items: center;
+  align-content: center;
+  padding: 10px;
+  margin: 15px 0 0 auto;
+  position: relative;
+
+
+  .header-cart-container {
+    width: auto;
+  }
+
+  .header-cart-element {
+    margin: 0 31px 0 0;
+
+    a {
+      font-size: 18px;
+      text-transform: none;
+      fill: var(--main-color);
+      color: var(--main-color);
+      background-color: rgba(0, 0, 0, 0);
+      padding: 0;
+
+      &:hover {
+        color: var(--second-color);
+      }
+    }
+  }
+
+  .cart-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    width: 300px;
+    z-index: 1000;
+
+    .cart-item {
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #f1f1f1;
+
+      .cart-item-image {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        margin-right: 10px;
+      }
+
+      .cart-item-title {
+        display: block;
+        font-size: 14px;
+      }
+
+      .cart-item-quantity {
+        font-size: 13px;
+        color: #777;
+      }
+
+      .cart-item-remove {
+        background: none;
+        border: none;
+        font-size: 18px;
+        color: #777;
+        cursor: pointer;
       }
     }
 
-    .cart-dropdown {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: white;
-      border: 1px solid #ddd;
-      padding: 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      display: none;
-      width: 300px;
-      z-index: 1000;
+    .cart-subtotal {
+      justify-content: space-between;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: bold;
+    }
 
-      .cart-item {
-        align-items: center;
-        padding: 10px;
-        border-bottom: 1px solid #f1f1f1;
+    .cart-checkout-button {
+      width: 100%;
+      background-color: var(--main-color);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-bottom: 10px;
 
-        .cart-item-image {
-          width: 50px;
-          height: 50px;
-          object-fit: cover;
-          margin-right: 10px;
-        }
-
-        .cart-item-title {
-          display: block;
-          font-size: 14px;
-        }
-
-        .cart-item-quantity {
-          font-size: 13px;
-          color: #777;
-        }
-
-        .cart-item-remove {
-          background: none;
-          border: none;
-          font-size: 18px;
-          color: #777;
-          cursor: pointer;
-        }
-      }
-
-      .cart-subtotal {
-        justify-content: space-between;
-        padding: 10px;
-        font-size: 14px;
-        font-weight: bold;
-      }
-
-      .cart-checkout-button {
-        width: 100%;
-        background-color: var(--main-color);
-        color: #fff;
-        border: none;
-        padding: 10px;
-        text-transform: uppercase;
-        cursor: pointer;
-        margin-bottom: 10px;
-
-        &:hover,
-        &:active,
-        &:focus {
-          background-color: #fef9c3;
-          color: var(--main-color);
-          svg {
-            fill: var(--main-color);
-          }
-        }
-      }
-
-      .cart-view-link {
-        display: block;
-        text-align: center;
-        padding: 10px;
+      &:hover,
+      &:active,
+      &:focus {
         background-color: #fef9c3;
         color: var(--main-color);
-        text-decoration: none;
-
-        &:hover,
-        &:active,
-        &:focus {
-          background-color: var(--main-color);
-          color: #fef9c3;
-          svg {
-            fill: #fef9c3;
-          }
+        svg {
+          fill: var(--main-color);
         }
       }
     }
 
-    &:hover .cart-dropdown {
+    .cart-view-link {
       display: block;
+      text-align: center;
+      padding: 10px;
+      background-color: #fef9c3;
+      color: var(--main-color);
+      text-decoration: none;
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: var(--main-color);
+        color: #fef9c3;
+        svg {
+          fill: #fef9c3;
+        }
+      }
     }
   }
 
-  .header-divider {
-    margin: 20px 0 0 0;
-    display: flex;
+  &:hover .cart-dropdown {
+    display: block;
+  }
+}
+
+.header-divider {
+  margin: 20px 0 0 0;
+  display: flex;
+  width: 100%;
+  position: relative;
+  padding: 10px 0;
+
+  span {
+    display: inline-block;
     width: 100%;
-    position: relative;
-    padding: 10px 0;
+    border-top: 1px solid #ededed;
+    margin: 0;
 
-    span {
-      display: inline-block;
-      width: 100%;
-      border-top: 1px solid #ededed;
-      margin: 0;
-      
-    }
   }
+}
 
-  /*@media screen and (min-width: 768px) {
-    .header-logo {
-      width: 18.438%;
-    }
+/*@media screen and (min-width: 768px) {
+  .header-logo {
+    width: 18.438%;
   }
+}
 
-  @media screen and (min-width: 992px) {}*/
+@media screen and (min-width: 992px) {}*/
 </style>

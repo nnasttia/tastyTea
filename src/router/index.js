@@ -4,7 +4,7 @@ const routes = [
     {
         path: '/',
         name: 'main',
-        component: () => import('../../pages/AppMainPage.vue'),
+        component: () => import('../pages/AppMainPage.vue'),
         meta: {
             public: true,
             title: 'Home' }
@@ -12,10 +12,19 @@ const routes = [
     {
         path: '/about',
         name: 'about',
-        component: () => import('../../pages/AppAboutPage.vue'),
+        component: () => import('../pages/AppAboutPage.vue'),
         meta: {
             public: true,
             title: 'About Us'
+        }
+    },
+    {
+        path: '/cart',
+        name: 'cart',
+        component: () => import('../pages/AppCartPage.vue'),
+        meta: {
+            public: true,
+            title: 'Cart'
         }
     }
 ];

@@ -1,6 +1,6 @@
 <template>
   <AppHeader/>
-  <AppMainPage/>
+  <router-view></router-view>
   <AppFooter/>
 </template>
 
@@ -22,7 +22,6 @@ useHead({
 import '@/styles/styles.css';
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
-import AppMainPage from "@/pages/AppMainPage.vue";
 
 </script>
 

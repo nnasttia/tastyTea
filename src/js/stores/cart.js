@@ -10,7 +10,18 @@ export const useCartStore = defineStore('cart', {
         },
         totalPrice(state) {
             return state.items.reduce((sum, item) => {
-                const price = Number(item.price) || 0;
+                let price = item.price;
+                if (typeof price === "string") {
+                    if (price.includes("-")) {
+                        const prices = price
+                            .replace(/\$/g, "")
+                            .split("-")
+                            .map((p) => parseFloat(p.trim()));
+                        price = (prices[0] + prices[1]) / 2;
+                    } else {
+                        price = parseFloat(price.replace(/\$/g, ""));
+                    }
+                }
                 const quantity = Number(item.quantity) || 0;
                 return sum + quantity * price;
             }, 0);
