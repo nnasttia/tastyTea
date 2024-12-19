@@ -43,5 +43,11 @@ export const useCartStore = defineStore('cart', {
                 });
             }
         },
+        removeFromCart(index) {
+            this.items.splice(index, 1);
+        },
+        clearCart() {
+            this.items = [];
+        },
     },
 });
