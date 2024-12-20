@@ -1,6 +1,6 @@
 <template>
   <main class="cart-container">
-    <h1>Cart</h1>
+    <h2>Cart</h2>
     <div v-if="cartStore.isEmpty" class="alert">
       <div class="alert-icon">
         <span>
@@ -125,7 +125,7 @@ const goToShop = () => {
   margin: 0 auto;
   padding: 20px;
 
-  h1 {
+  h2 {
     font-size: 36px;
     margin-bottom: 40px;
     text-align: center;

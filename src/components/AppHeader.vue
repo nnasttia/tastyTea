@@ -23,9 +23,9 @@
               </a>
             </li>
             <li>
-              <a href="#">
+              <router-link to="/contacts">
                 Contacts
-              </a>
+              </router-link>
             </li>
           </ul>
         </nav>

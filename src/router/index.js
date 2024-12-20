@@ -26,6 +26,15 @@ const routes = [
             public: true,
             title: 'Cart'
         }
+    },
+    {
+        path: '/contacts',
+        name: 'contacts',
+        component: () => import('../pages/AppContactsPage.vue'),
+        meta: {
+            public: true,
+            title: 'Contacts'
+        }
     }
 ];
 

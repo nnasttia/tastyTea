@@ -69,6 +69,7 @@ li {
 }
 
 h1,
+h2,
 p {
   margin: 0;
   padding: 0;
@@ -111,4 +112,12 @@ p {
   white-space: nowrap;
   overflow: hidden;
   width: 1px;
+}
+
+address {
+  font-style: normal !important;
+}
+
+.gap-45 {
+  gap: 45px;
 }
