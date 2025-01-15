@@ -1,0 +1,51 @@
+[
+  {
+    "title": "Bright Morning Stars Mental",
+    "type": "Black",
+    "price": "$25.00",
+    "image": "src/img/products/Bright-Morning-Stars-Mental.webp"
+
+  },
+  {
+   "title": "Fire Tower Lapsang",
+    "type": "Black",
+    "price": "$8.00 - $17.00",
+    "image": "../img/products/Fire-tower-lapsang.webp"
+  },
+  {
+    "title": "Slumber Party Tisane",
+    "type": "Tisanes",
+    "price": "$25.00",
+    "image": "../img/products/Slumber-party-tisane.webp"
+  },
+  {
+    "title": "Aroma Candle",
+    "type": "Blends",
+    "price": "$9.99",
+    "image": "../img/products/Aroma-candle.webp"
+  },
+  {
+    "title": "Appalachian Sunrise Herbal",
+    "type": "Blends",
+    "price": "$10.00",
+    "image": "../img/products/Appalachian-sunrise-herbal.webp"
+  },
+  {
+    "title": "White Peony",
+    "type": "White",
+    "price": "$15.00 - $34.00",
+    "image": "../img/products/White-Peony.webp"
+  },
+  {
+    "title": "Burgeoning farm honey",
+    "type": "Other",
+    "price": "$4.00",
+    "image": "../img/products/Burgeoning-farm-honey.webp"
+  },
+  {
+    "title": "First tower lapsang souchong",
+    "type": "Green",
+    "price": "$4.00",
+    "image": "../img/products/Fire-tower-lapsang.webp"
+  }
+]
