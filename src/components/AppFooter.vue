@@ -241,4 +241,9 @@
     }
   }
 
+  @media screen and (max-width: 767px) {
+    .footer-inner-container {
+      flex-wrap: wrap;
+    }
+  }
 </style>

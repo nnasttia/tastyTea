@@ -1,5 +1,5 @@
 <template>
-  <main class="container d-flex gap-45">
+  <main class="container d-flex gap-45 ">
     <div class="contacts ">
       <h2 class="contacts__title">Write to us with <br> any questions.</h2>
       <div class="contacts__content d-flex">
@@ -49,7 +49,7 @@
         </a>
       </div>
     </div>
-    <form class="contacts__form">
+    <form class="contacts__form" @submit="handleSubmit">
       <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" id="name" placeholder="Type your name" />
@@ -62,15 +62,52 @@
         <label for="message">Message:</label>
         <textarea id="message" placeholder="Type your message"></textarea>
       </div>
-      <button class="btn form-group-button">Send message</button>
+      <button class="btn form-group-button" type="submit">Send message</button>
     </form>
   </main>
 </template>
 
 <script setup>
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  if (!name || !email || !message) {
+    alert('Please fill out all fields.');
+    return;
+  }
+
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, message }),
+    });
+
+    if (response.ok) {
+      alert('Message sent successfully!');
+
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('message').value = '';
+    } else {
+      throw new Error('Failed to send message');
+    }
+  } catch (error) {
+    console.error(error);
+    alert('Error sending message. Please try again later.');
+  }
+};
 </script>
 
 <style lang="scss" scoped>
+
 .contacts {
   margin-top: 30px;
   padding: 20px;
@@ -95,7 +132,6 @@
     gap: 100px;
 
     .store {
-
       &__title {
         font-size: 24px;
         font-weight: 400;
@@ -166,8 +202,8 @@
         resize: vertical;
         min-height: 241px;
       }
-
     }
+
     .form-group-button {
       display: block;
       width: 100%;
@@ -180,4 +216,25 @@
     }
   }
 }
+
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .contacts,
+  .contacts__form {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .contacts__content {
+    flex-direction: column;
+  }
+
+  .contacts__stores {
+    gap: 20px;
+  }
+}
+
 </style>

@@ -22,15 +22,28 @@
 .categories {
   cursor: pointer;
   margin: 30px auto 110px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .category {
+    flex: 1 1 calc(33.33% - 10px);
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
 }
 
-.category {
-  padding-top: 10px;
-}
+@media (max-width: 767px) {
+  .categories {
+    flex-direction: column;
+    align-items: center;
+  }
 
-.category:not(:last-child) {
-  padding-bottom: 10px;
-  width: 100%;
-  padding-right: 10px;
+  .category {
+    flex: 1 1 100%; // Элементы занимают всю ширину родителя
+  }
 }
 </style>

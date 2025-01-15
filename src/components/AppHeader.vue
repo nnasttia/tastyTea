@@ -29,6 +29,13 @@
             </li>
           </ul>
         </nav>
+
+        <button @click="toggleMenu" class="menu-toggle">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
         <div
             class="header-cart d-flex"
             @mouseenter="showCart = true"
@@ -105,6 +112,10 @@ const removeItem = (index) => {
 
 const cartPage = () => {
   router.push({ name: 'cart' });
+}
+
+const toggleMenu = () => {
+  document.querySelector('.header-menu').classList.toggle('active');
 }
 
 </script>
@@ -328,6 +339,79 @@ const cartPage = () => {
     border-top: 1px solid #ededed;
     margin: 0;
 
+  }
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-toggle .bar {
+  width: 100%;
+  height: 5px;
+  background-color: var( --main-color);
+  border-radius: 5px;
+}
+
+
+@media screen and (max-width: 767px) {
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .header-row {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-logo {
+    margin-bottom: 20px;
+  }
+
+  .header-menu {
+    display: none;
+    flex-direction: column;
+    margin-top: 10px;
+    align-items: center;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-menu.active {
+    display: flex;
+  }
+
+  .header-cart {
+    margin-top: 20px;
+    margin-left: 0;
+  }
+
+  .header-cart-container {
+    margin-right: 0;
+  }
+
+  .header-cart-element a {
+    font-size: 16px;
+  }
+
+  .cart-dropdown {
+    width: 250px;
+    top: 100%;
+    right: 0;
+  }
+
+  .cart-checkout-button {
+    width: 100%;
   }
 }
 

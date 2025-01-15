@@ -123,6 +123,7 @@ const filteredProducts = computed(() => {
   text-align: center;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 
   a {
     padding: 10px 20px;

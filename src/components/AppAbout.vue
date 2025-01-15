@@ -22,44 +22,73 @@
 
 <style scoped lang="scss">
 
-.about-us {
-  background-color: #e8f2ed;
-  text-align: center;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 
-  h2 {
-    margin: 0 0 23px;
-    font-family: 'Krona One', serif;
-    color: var(--second-color);
-    font-size: 36px;
-    font-weight: 400;
-    text-transform: none;
-    line-height: 44px;
-    letter-spacing: 0;
+  img {
+    max-width: 50%;
+    height: auto;
   }
 
-  p {
-    font-family: "Heebo", serif;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: 0;
-    margin: 0;
-    width: 80%;
-  }
+  .about-us {
+    flex: 1;
+    background-color: #e8f2ed;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 
-  a {
-    padding: 0;
-    margin: 46px 0 0 5px;
-    color: var(--main-color);
-    background-color: rgba(0, 0, 0, 0);
-
-    &:hover {
+    h2 {
+      margin: 0 0 23px;
+      font-family: 'Krona One', serif;
       color: var(--second-color);
+      font-size: 36px;
+      font-weight: 400;
+      line-height: 44px;
+      letter-spacing: 0;
+    }
+
+    p {
+      font-family: "Heebo", serif;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: 0;
+      margin: 0;
+      width: 80%;
+    }
+
+    a {
+      margin: 46px 0 0 5px;
+      color: var(--main-color);
+
+      &:hover {
+        color: var(--second-color);
+      }
     }
   }
 }
+
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .about-us {
+      width: 100%;
+      padding: 20px;
+    }
+  }
+}
+
 
 </style>

@@ -82,9 +82,10 @@
 }
 
 .subscribe-form {
-  width: auto;
+  display: flex;
   justify-content: center;
   margin-bottom: 48px;
+  width: auto;
 
   input {
     padding: 16px 0 17px 29px;
@@ -94,16 +95,46 @@
     font-family: var(--main-font), sans-serif;
     font-size: 18px;
     font-weight: 400;
-    letter-spacing: 0;
     border-style: solid;
     border-width: 0;
+    flex: 1;
+    max-width: 70%;
+    margin-right: 10px;
   }
 
   button {
-    margin-left: 10px;
+    color: var(--white);
+    font-family: var(--main-font), sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    border: none;
+    border-radius: 5px;
+    min-width: 120px;
+    text-align: center;
 
     &:hover {
-      background-color: #1f1f1f;
+      background-color: var(--second-color);
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .subscribe-form {
+    flex-direction: column;
+    align-items: stretch;
+
+    input {
+      max-width: 100%;
+    }
+
+    input, button {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-bottom: 0;
     }
   }
 }
