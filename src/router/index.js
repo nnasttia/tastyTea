@@ -53,6 +53,15 @@ const routes = [
             public: true,
             title: 'Register'
         }
+    },
+    {
+        path: '/account',
+        name: 'account',
+        component: () => import('../pages/AppAccountPage.vue'),
+        meta: {
+            public: true,
+            title: 'Account'
+        }
     }
 ];
 

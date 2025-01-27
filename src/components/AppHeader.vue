@@ -42,7 +42,7 @@
           <div class="header-cart-element">
             <router-link v-if="!currentUser" to="/login">My account</router-link>
             <div v-else>
-              <span class="greetings">Hi, {{ currentUser.name }}</span>
+              <router-link to="/account"><span class="greetings">Hi, {{ currentUser.name }}</span></router-link>
               <button @click="handleLogout" class="logout-button">Logout</button>
             </div>
           </div>
