@@ -1,7 +1,7 @@
 <template>
-  <AppHeader/>
+  <AppHeader v-if="!isLoginPage && !isRegisterPage" />
   <router-view></router-view>
-  <AppFooter/>
+  <AppFooter v-if="!isLoginPage && !isRegisterPage"/>
 </template>
 
 <script setup>
@@ -22,6 +22,12 @@ useHead({
 import '@/styles/styles.css';
 import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
+import {computed} from "vue";
+import {useRoute} from "vue-router";
+
+const route = useRoute();
+const isLoginPage = computed(() => route.name === 'login');
+const isRegisterPage = computed(() => route.name === 'register');
 
 </script>
 

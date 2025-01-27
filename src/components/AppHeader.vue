@@ -38,15 +38,17 @@
 
         <div
             class="header-cart d-flex"
-            @mouseenter="showCart = true"
-            @mouseleave="showCart = false"
         >
-          <div class="header-cart-container">
-            <div class="header-cart-element">
-              <a href="#">My account</a>
+          <div class="header-cart-element">
+            <router-link v-if="!currentUser" to="/login">My account</router-link>
+            <div v-else>
+              <span class="greetings">Hi, {{ currentUser.name }}</span>
+              <button @click="handleLogout" class="logout-button">Logout</button>
             </div>
           </div>
-          <div class="header-cart-container">
+          <div class="header-cart-container"
+               @mouseenter="showCart = true"
+               @mouseleave="showCart = false">
             <div class="header-cart-element">
               <router-link to="/cart">Cart: {{ cartStore.totalQuantity }}</router-link>
             </div>
@@ -97,12 +99,29 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {ref, onMounted} from 'vue';
 import { useCartStore } from '@/js/stores/cart';
 import {useRouter} from "vue-router";
 
 const router = useRouter();
 const cartStore = useCartStore();
+
+const currentUser = ref(null);
+
+const loadUser = () => {
+  const user = localStorage.getItem("currentUser");
+  currentUser.value = user ? JSON.parse(user) : null;
+};
+
+const handleLogout = () => {
+  localStorage.removeItem("currentUser");
+  currentUser.value = null;
+  router.push("/login");
+};
+
+onMounted(() => {
+  loadUser();
+});
 
 const showCart = ref(false);
 
@@ -137,7 +156,6 @@ const toggleMenu = () => {
   transition: background .3s, border .3s, border-radius .3s, box-shadow .3s,
   -webkit-border-radius .3s, -webkit-box-shadow .3s;
   justify-content: flex-start;
-  /*width: 100%;*/
 }
 
 .header-menu {
@@ -227,6 +245,10 @@ const toggleMenu = () => {
       &:hover {
         color: var(--second-color);
       }
+    }
+
+    .greetings {
+      color: var(--main-color);
     }
   }
 
@@ -414,12 +436,4 @@ const toggleMenu = () => {
     width: 100%;
   }
 }
-
-/*@media screen and (min-width: 768px) {
-  .header-logo {
-    width: 18.438%;
-  }
-}
-
-@media screen and (min-width: 992px) {}*/
 </style>

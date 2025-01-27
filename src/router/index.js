@@ -35,6 +35,24 @@ const routes = [
             public: true,
             title: 'Contacts'
         }
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import('../pages/AppLoginPage.vue'),
+        meta: {
+            public: true,
+            title: 'Login'
+        }
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: () => import('../pages/AppRegisterPage.vue'),
+        meta: {
+            public: true,
+            title: 'Register'
+        }
     }
 ];
 
