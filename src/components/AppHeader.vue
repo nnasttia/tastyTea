@@ -40,10 +40,9 @@
             class="header-cart d-flex"
         >
           <div class="header-cart-element">
-            <router-link v-if="!currentUser" to="/login">My account</router-link>
+            <router-link v-if="!currentUser" to="/login">Login</router-link>
             <div v-else>
-              <router-link to="/account"><span class="greetings">Hi, {{ currentUser.name }}</span></router-link>
-              <button @click="handleLogout" class="logout-button">Logout</button>
+              <router-link to="/account"><span class="greetings">Account:  {{ currentUser.name }}</span></router-link>
             </div>
           </div>
           <div class="header-cart-container"
@@ -111,12 +110,6 @@ const currentUser = ref(null);
 const loadUser = () => {
   const user = localStorage.getItem("currentUser");
   currentUser.value = user ? JSON.parse(user) : null;
-};
-
-const handleLogout = () => {
-  localStorage.removeItem("currentUser");
-  currentUser.value = null;
-  router.push("/login");
 };
 
 onMounted(() => {

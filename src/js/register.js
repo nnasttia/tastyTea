@@ -1,7 +1,11 @@
 const express = require("express");
+const cors = require("cors");
 const fs = require("fs");
+const router = require("@/router");
+
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.post("/register", (req, res) => {
@@ -11,18 +15,20 @@ app.post("/register", (req, res) => {
         return res.status(400).json({ error: "All fields are required" });
     }
 
-    const usersFile = "./users.json";
+    const usersFile = "../json/users.json";
 
     fs.readFile(usersFile, (err, data) => {
         if (err) {
+            console.error("Error reading users file:", err);
             return res.status(500).json({ error: "Error reading users file" });
         }
 
-        let users = JSON.parse(data);
-        const userExists = users.some((user) => user.email === email);
-
-        if (userExists) {
-            return res.status(400).json({ error: "User already exists" });
+        let users = [];
+        try {
+            users = JSON.parse(data);
+        } catch (parseError) {
+            console.error("Error parsing JSON:", parseError);
+            return res.status(500).json({ error: "Error parsing users file" });
         }
 
         const newUser = {

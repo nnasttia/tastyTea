@@ -3,7 +3,7 @@
     <div class="login-container d-flex">
       <div class="login-image d-flex">
         <router-link to="/">
-          <img src="../../src/img/logo.svg" alt="site logo Tasty Tea">
+          <img src="../../src/img/logo.svg" alt="site logo Tasty Tea" />
         </router-link>
       </div>
       <div class="login-form">
@@ -11,7 +11,8 @@
         <form @submit.prevent="handleLogin">
           <div class="form-group">
             <input
-                type=""
+                type="text"
+                v-model="firstName"
                 placeholder="Enter first name"
                 required
             />
@@ -36,7 +37,7 @@
           <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
         </form>
         <div class="extra-links">
-          <a href="#" @click.prevent="forgotPassword">Forgot Password?</a><br>
+          <a href="#" @click.prevent="forgotPassword">Forgot Password?</a><br />
           <router-link to="/login">Already have an account? Sign in</router-link>
         </div>
       </div>
@@ -68,7 +69,7 @@ const handleLogin = async () => {
 
     if (!response.ok) {
       const errorData = await response.json();
-      errorMessage.value = errorData.error;
+      errorMessage.value = errorData.error || "Unknown error occurred";
       return;
     }
 
