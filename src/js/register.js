@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
-const router = require("@/router");
 
 const app = express();
 
@@ -45,7 +44,7 @@ app.post("/register", (req, res) => {
                 return res.status(500).json({ error: "Error saving user" });
             }
 
-            res.status(201).json({ message: "User registered successfully" });
+            res.status(201).json({ message: "User registered successfully", redirectTo: "/login" });
         });
     });
 });

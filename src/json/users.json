@@ -4,17 +4,5 @@
     "email": "khaia.nastia@gmail.com",
     "password": "12345",
     "name": "Anastasiia"
-  },
-  {
-    "id": 1,
-    "email": "test@gmail.com",
-    "password": "12345",
-    "name": "Test"
-  },
-  {
-    "id": 2,
-    "firstName": "Test1",
-    "email": "test1@gmail.com",
-    "password": "12345"
   }
 ]
